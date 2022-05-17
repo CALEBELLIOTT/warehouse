@@ -8,9 +8,40 @@ const packages = [
   { heavy: true, priority: false, fragile: true, to: 'Jeremy', trackingNumber: 'suz2367', imgUrl: 'resources/package-7.jpeg' }]
 
 
+let players = []
+
 let currentPackages = packages
 let lostPackage = undefined
 let counter = 0
+let currentPlayer = undefined
+
+
+function setPlayer(event) {
+  event.preventDefault()
+  let submittedName = event.target.name.value
+  currentPlayer = players.find(p => p.name = submittedName)
+  if (!currentPlayer) {
+    players.push({ name: submittedName, highScore: 0 })
+  }
+  else {
+    window.alert("That player already exists")
+  }
+  console.log(players);
+}
+
+function savePlayers() {
+  window.localStorage.setItem("players", JSON.stringify(players))
+}
+
+function loadPlayers() {
+  let playersLoad = JSON.parse(window.localStorage.getItem("players"))
+  if (playersLoad) {
+    players = playersLoad
+  }
+}
+
+
+
 
 function drawBoxes() {
   let template = ``
@@ -67,5 +98,10 @@ function formatWrongImages(trackingNum) {
 function startGame() {
   selectMissingPackage()
   drawBoxes()
+  document.getElementById("intro-container").classList.add("d-none")
+  document.getElementById("game-container").classList.remove("d-none")
+  document.getElementById("player-label").innerText = `Current Player: ${currentPlayer.name} with a high score of ${currentPlayer.score}`
 }
-startGame()
+
+
+loadPlayers()
