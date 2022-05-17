@@ -14,3 +14,11 @@
   height: 20em;
   width: 20em;
 }
+
+.intro-card {
+  width: 80%;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+  margin: auto;
+}

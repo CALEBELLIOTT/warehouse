@@ -15,23 +15,52 @@
 
 
 
-<body class="container-fluid bg-dark">
-  <div class="row">
-    <div class="col-9">
-      <button class="btn btn-light m-3" onclick="guess('fragile')"> Fragile </button>
-      <button class="btn btn-light m-3" onclick="guess('heavy')"> Weight </button>
-      <button class="btn btn-light m-3" onclick="guess('priority')"> Priority </button>
-    </div>
-    <div class="col-3 d-flex align-items-center">
-      <h3 class="text-light" id="hint-counter">Hints: 0</h3>
+<body class="bg-dark">
+  <!-- NOTE hide this row when the game begins -->
+  <div class="container-fluid" id="intro-container">
+    <div class="row" id="intro-screen"></div>
+    <div class="col-12 d-flex">
+      <div class="intro-card bg-light justify-self-center my-5 p-3">
+        <h3> Hello and Welcome!</h3>
+        <p>Try to find the missing package by sorting all the packages using the buttons at the top of the page! Once
+          you
+          are comfortable with how far you have narrowed it down go ahead and try to guess what package is missing! <br>
+          <br> Be
+          warned, if you guess the wrong package, it will cost you 3 hint points. The lower your score, the better! Good
+          luck!
+        </p>
+        <form action="submit" onsubmit="setPlayer(event), startGame()" class="p-3">
+          <input type="text" placeholder="name" name="name">
+          <button class="btn-dark" type="submit"> Start Game</button>
+        </form>
+      </div>
     </div>
   </div>
-  <div class="row" id="box-row">
 
-  </div>
+
+
+  <!-- NOTE take off the hidden properties on these rows when the game begins -->
+
+  <div class="container-fluid d-none" id="game-container">
+    <div class="row">
+      <div class="col-9">
+        <button class="btn btn-light m-3" onclick="guess('fragile')"> Fragile </button>
+        <button class="btn btn-light m-3" onclick="guess('heavy')"> Weight </button>
+        <button class="btn btn-light m-3" onclick="guess('priority')"> Priority </button>
+        <h3 id="player-label"></h3>
+      </div>
+      <div class="col-3 d-flex align-items-center">
+        <h3 class="text-light" id="hint-counter">Hints: 0</h3>
+      </div>
+    </div>
+    <div class="row" id="box-row">
+
+    </div>
   </div>
 
   <script src="main.js"></script>
+
+  </div>
 </body>
 
 
