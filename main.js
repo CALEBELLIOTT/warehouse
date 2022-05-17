@@ -19,24 +19,31 @@ let currentPlayer = undefined
 function setPlayer(event) {
   event.preventDefault()
   let submittedName = event.target.name.value
-  currentPlayer = players.find(p => p.name = submittedName)
+  currentPlayer = players.find(p => p.name == submittedName)
   if (!currentPlayer) {
-    players.push({ name: submittedName, highScore: 0 })
-  }
-  else {
-    window.alert("That player already exists")
+    currentPlayer = { name: submittedName, highScore: "n/a" }
+    players.push(currentPlayer)
+    savePlayers()
   }
   console.log(players);
 }
+
 
 function savePlayers() {
   window.localStorage.setItem("players", JSON.stringify(players))
 }
 
+function saveScore() {
+  if (counter < currentPlayer.highScore || currentPlayer.highScore == "n/a") {
+    currentPlayer.highScore = counter
+  }
+  savePlayers()
+}
+
 function loadPlayers() {
-  let playersLoad = JSON.parse(window.localStorage.getItem("players"))
-  if (playersLoad) {
-    players = playersLoad
+  let potentialPlayers = JSON.parse(window.localStorage.getItem("players"))
+  if (potentialPlayers != null) {
+    players = potentialPlayers
   }
 }
 
@@ -82,6 +89,8 @@ function incrementHintCounter(amount) {
 function checkSelection(id) {
   if (id == "undefined") {
     window.alert("You win! Nice job!")
+    saveScore()
+    document.getElementById("player-label").innerText = `Current Player: ${currentPlayer.name} with a high score of ${currentPlayer.highScore}`
   }
   else {
     incrementHintCounter(3)
@@ -100,8 +109,9 @@ function startGame() {
   drawBoxes()
   document.getElementById("intro-container").classList.add("d-none")
   document.getElementById("game-container").classList.remove("d-none")
-  document.getElementById("player-label").innerText = `Current Player: ${currentPlayer.name} with a high score of ${currentPlayer.score}`
+  document.getElementById("player-label").innerText = `Current Player: ${currentPlayer.name} with a high score of ${currentPlayer.highScore}`
 }
 
 
 loadPlayers()
+console.log(players);
