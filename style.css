@@ -1,4 +1,16 @@
-img:hover {
+.img-unknown:hover {
   cursor: pointer;
   transform: scale(1.10);
+}
+
+.wrong-img {
+  filter: grayscale(1);
+  cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
+}
+
+.box-card {
+  height: 20em;
+  width: 20em;
 }

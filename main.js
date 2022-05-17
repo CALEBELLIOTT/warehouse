@@ -15,9 +15,11 @@ let counter = 0
 function drawBoxes() {
   let template = ``
   currentPackages.forEach(p => {
-    template += `    <div class="col-md-3 bg-light text-center p-3">
-    <img class="img-fluid p-2" onclick="checkSelection('${p.trackingNumber}')" src='${p.imgUrl}' alt="">
+    template += `    <div class="col-md-3 text-center">
+    <div class="m-3 bg-light p-3 box-card">
+    <img class="img-fluid p-2 img-unknown" id="${p.trackingNumber}" onclick="checkSelection('${p.trackingNumber}')" src='${p.imgUrl}' alt="">
     <h3 class="text-center">To: ${p.to}</h3>
+    </div>
   </div>`
   })
   document.getElementById("box-row").innerHTML = template
@@ -28,7 +30,6 @@ function selectMissingPackage() {
   console.log(index);
   currentPackages[index].trackingNumber = undefined
   lostPackage = currentPackages[index]
-  console.log(lostPackage);
 }
 
 
@@ -48,15 +49,20 @@ function incrementHintCounter(amount) {
 }
 
 function checkSelection(id) {
-  console.log(id);
   if (id == "undefined") {
     window.alert("You win! Nice job!")
   }
   else {
     incrementHintCounter(3)
+    formatWrongImages(id)
   }
 }
 
+
+function formatWrongImages(trackingNum) {
+  document.getElementById(trackingNum).classList.add("wrong-img")
+  document.getElementById(trackingNum).classList.remove("img-unknown")
+}
 
 function startGame() {
   selectMissingPackage()
