@@ -13,18 +13,28 @@
   <title>Warehouse Tracker</title>
 </head>
 
-<body>
 
-  <body class="colunm-fluid">
-    <div class="row">
-      <div class="col-md-3">
-        <img class="img-fluid" src="" alt="">
-      </div>
+
+<body class="container-fluid bg-dark">
+  <div class="row">
+    <div class="col-9">
+      <button class="btn btn-light m-3" onclick="guess('fragile')"> Fragile </button>
+      <button class="btn btn-light m-3" onclick="guess('heavy')"> Weight </button>
+      <button class="btn btn-light m-3" onclick="guess('priority')"> Priority </button>
     </div>
-  </body>
+    <div class="col-3 d-flex align-items-center">
+      <h3 class="text-light" id="hint-counter">Hints: 0</h3>
+    </div>
+  </div>
+  <div class="row" id="box-row">
 
+  </div>
+  </div>
 
   <script src="main.js"></script>
 </body>
+
+
+
 
 </html>
